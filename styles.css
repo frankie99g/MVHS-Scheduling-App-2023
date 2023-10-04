@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+.calendar-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 36px; /* Increase the font size */
+    margin-bottom: 30px; /* Increase margin as needed */
+}
+
+.calendar {
+    border-collapse: collapse;
+    width: 80%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the calendar on the page */
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px; /* Increase padding to make the buttons larger */
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b30000;
+}
+
+#month-year {
+    font-size: 24px;
+}
+
+th, td {
+    padding: 15px; /* Increase padding to increase cell size */
+    font-size: 18px; /* Increase the font size */
+}
+
+th {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+td {
+    background-color: #fff;
+}
+
+
