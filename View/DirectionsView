@@ -1,0 +1,43 @@
+// PLACEHOLDER CODE, NEEDS TO BE REVIEWED
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Directions to Venue</title>
+    <!-- Include your CSS stylesheets here -->
+</head>
+<body>
+    <header>
+        <h1>Directions to Venue</h1>
+    </header>
+
+    <nav>
+        <a href="/">Home</a>
+    </nav>
+
+    <section>
+        <?php
+        // Replace with PHP code to fetch venue details from the model
+        $venueId = 1; // Example venue ID
+        $venueDetails = $venueModel->getVenueDetails($venueId);
+
+        if ($venueDetails) {
+            echo '<h2>Venue:</h2>';
+            echo '<p>' . $venueDetails['name'] . '</p>';
+            echo '<h2>Address:</h2>';
+            echo '<p>' . $venueDetails['address'] . '</p>';
+            
+            // Replace with your code to display a map with directions
+            // You can use JavaScript and mapping APIs (e.g., Google Maps) to provide interactive directions.
+        } else {
+            echo '<p>Venue not found.</p>';
+        }
+        ?>
+    </section>
+
+    <footer>
+        &copy; <?php echo date("Y"); ?> Your Soccer App
+    </footer>
+</body>
+</html>
