@@ -1,0 +1,29 @@
+// PLACEHOLDER CODE, NEEDS TO BE REVIEWED
+
+class MatchController {
+    private $matchModel;
+
+    public function __construct($matchModel) {
+        $this->matchModel = $matchModel;
+    }
+
+    // Display match details
+    public function viewMatch($matchId) {
+        // Fetch match details from the model
+        $matchDetails = $this->matchModel->getMatchDetails($matchId);
+
+        // Include the Match Details View to display the information
+        include('match_details_view.php'); // Replace with the actual view file name
+    }
+
+    // List upcoming matches
+    public function listUpcomingMatches() {
+        // Fetch a list of upcoming matches from the model
+        $upcomingMatches = $this->matchModel->getUpcomingMatches();
+
+        // Include the Upcoming Matches List View to display the list of matches
+        include('upcoming_matches_view.php'); // Replace with the actual view file name
+    }
+
+    // You can add more methods for managing matches if needed
+}
