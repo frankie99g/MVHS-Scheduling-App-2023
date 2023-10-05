@@ -1,0 +1,39 @@
+// THIS IS PLACEHOLDER CODE, NEEDS TO BE REVIEWED
+class VenueModel {
+    private $db; // Your database connection
+
+    public function __construct($db) {
+        $this->db = $db;
+    }
+
+    // Get venue details by ID
+    public function getVenueDetails($venueId) {
+        $query = "SELECT * FROM venues WHERE id = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $venueId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 1) {
+            return $result->fetch_assoc();
+        } else {
+            return null; // Venue not found
+        }
+    }
+
+    // Get a list of all venues
+    public function getAllVenues() {
+        $query = "SELECT * FROM venues";
+        $result = $this->db->query($query);
+
+        $venues = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $venues[] = $row;
+        }
+
+        return $venues;
+    }
+
+    // You can add more methods for updating and managing venues if needed
+}
