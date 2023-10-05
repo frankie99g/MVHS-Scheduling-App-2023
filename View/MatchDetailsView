@@ -1,0 +1,41 @@
+// PLACEHOLDER CODE, NEEDS TO BE REVIEWED
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Match Details</title>
+    <!-- Include your CSS stylesheets here -->
+</head>
+<body>
+    <header>
+        <h1>Match Details</h1>
+    </header>
+
+    <nav>
+        <a href="/">Home</a>
+    </nav>
+
+    <section>
+        <?php
+        // Replace with PHP code to fetch match details from the model
+        $matchId = 1; // Example match ID
+        $matchDetails = $matchModel->getMatchDetails($matchId);
+
+        if ($matchDetails) {
+            echo '<h2>Match Date and Time:</h2>';
+            echo '<p>' . $matchDetails['match_date'] . ' at ' . $matchDetails['match_time'] . '</p>';
+            echo '<h2>Opponent:</h2>';
+            echo '<p>' . $matchDetails['opponent'] . '</p>';
+            // You can display more information about the match here
+        } else {
+            echo '<p>Match not found.</p>';
+        }
+        ?>
+    </section>
+
+    <footer>
+        &copy; <?php echo date("Y"); ?> Your Soccer App
+    </footer>
+</body>
+</html>
