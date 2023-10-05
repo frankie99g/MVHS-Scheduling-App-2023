@@ -1,0 +1,29 @@
+// PLACEHOLDER CODE, NEEDS TO BE REVIEWED
+
+class VenueController {
+    private $venueModel;
+
+    public function __construct($venueModel) {
+        $this->venueModel = $venueModel;
+    }
+
+    // Display venue details
+    public function viewVenue($venueId) {
+        // Fetch venue details from the model
+        $venueDetails = $this->venueModel->getVenueDetails($venueId);
+
+        // Include the Venue Details View to display the information
+        include('venue_details_view.php'); // Replace with the actual view file name
+    }
+
+    // List all venues
+    public function listVenues() {
+        // Fetch a list of all venues from the model
+        $venues = $this->venueModel->getAllVenues();
+
+        // Include the Venues List View to display the list of venues
+        include('venues_list_view.php'); // Replace with the actual view file name
+    }
+
+    // You can add more methods for managing venues if needed
+}
