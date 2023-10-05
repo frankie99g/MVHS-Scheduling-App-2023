@@ -1,0 +1,44 @@
+// PLACEHOLDER CODE, NEEDS TO BE REVIEWED
+
+class MatchModel {
+    private $db; // Your database connection
+
+    public function __construct($db) {
+        $this->db = $db;
+    }
+
+    // Get match details by ID
+    public function getMatchDetails($matchId) {
+        $query = "SELECT * FROM matches WHERE id = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $matchId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 1) {
+            return $result->fetch_assoc();
+        } else {
+            return null; // Match not found
+        }
+    }
+
+    // Get a list of upcoming matches
+    public function getUpcomingMatches() {
+        $currentDate = date('Y-m-d H:i:s');
+        $query = "SELECT * FROM matches WHERE match_date > ? ORDER BY match_date ASC";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $currentDate);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $matches = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $matches[] = $row;
+        }
+
+        return $matches;
+    }
+
+    // You can add more methods for updating and managing matches if needed
+}
