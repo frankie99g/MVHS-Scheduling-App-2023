@@ -1,0 +1,61 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
+using YourDbContextNamespace;
+
+public class NotificationsController : Controller
+{
+    private readonly YourDbContext _context;
+    private readonly SendGridClient _sendGridClient;
+    private readonly string _twilioAccountSid;
+    private readonly string _twilioAuthToken;
+    private readonly string _twilioPhoneNumber;
+
+    public NotificationsController(YourDbContext context, SendGridClient sendGridClient, string twilioAccountSid, string twilioAuthToken, string twilioPhoneNumber)
+    {
+        _context = context;
+        _sendGridClient = sendGridClient;
+        _twilioAccountSid = twilioAccountSid;
+        _twilioAuthToken = twilioAuthToken;
+        _twilioPhoneNumber = twilioPhoneNumber;
+    }
+
+    public async Task<IActionResult> SendNotifications()
+    {
+        // Fetch data from the database
+        var user = await _context.Users.FirstAsync();
+        if (user == null)
+        {
+            return NotFound("User not found");
+        }
+
+        // Send an email notification
+        var emailMessage = new SendGridMessage()
+        {
+            From = new EmailAddress("your-email@example.com", "Your Name"),
+            Subject = "Notification Subject",
+            PlainTextContent = "Notification message",
+            HtmlContent = "<strong>Notification message</strong>"
+        };
+        emailMessage.AddTo(new EmailAddress(user.Email, user.Name));
+        await _sendGridClient.SendEmailAsync(emailMessage);
+
+        // Send a text message notification
+        TwilioClient.Init(_twilioAccountSid, _twilioAuthToken);
+        await MessageResource.CreateAsync(
+            body: "Notification message",
+            from: new PhoneNumber(_twilioPhoneNumber),
+            to: new PhoneNumber(user.PhoneNumber)
+        );
+
+        // Return a success result
+        return Ok("Notifications sent successfully");
+    }
+}
