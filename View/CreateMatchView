@@ -1,0 +1,30 @@
+@model IEnumerable<YourNamespace.Match>
+
+<h2>Matches</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Team1</th>
+            <th>Team2</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Team1)</td>
+            <td>@Html.DisplayFor(modelItem => item.Team2)</td>
+            <td>@Html.DisplayFor(modelItem => item.Date)</td>
+            <td>@Html.DisplayFor(modelItem => item.Location)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
