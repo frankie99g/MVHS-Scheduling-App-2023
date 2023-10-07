@@ -1,0 +1,25 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace YourNamespace
+{
+    public class Match
+    {
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string Team1 { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string Team2 { get; set; }
+
+        [Required]
+        public DateTime Date { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        public string Location { get; set; }
+    }
+}
